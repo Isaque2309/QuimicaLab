@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ElementData, CATEGORY_NAMES, CATEGORY_COLORS } from '../../data/elementsData';
 import { BohrModel } from '../BohrModel';
 import { useTheme } from '../../context/ThemeContext';
@@ -55,9 +56,9 @@ export const ElementDetailModal: React.FC<ElementDetailModalProps> = ({
   // Convert Kelvin to Celsius helper
   const kToC = (k: number | null) => (k !== null ? `${(k - 273.15).toFixed(1)} °C (${k} K)` : 'Desconhecido');
 
-  return (
+  return createPortal(
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-5 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-5 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
       style={{ overscrollBehavior: 'contain' }}
     >
       <div 
@@ -607,5 +608,5 @@ export const ElementDetailModal: React.FC<ElementDetailModalProps> = ({
         </div>
       </div>
     </div>
-  );
+  , document.body);
 };
