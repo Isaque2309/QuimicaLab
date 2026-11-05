@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-orbitron: 'Orbitron', sans-serif;
+    --font-rajdhani: 'Rajdhani', sans-serif;
+    --gap-table: 6px;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #040816;
+    color: #f1f5f9;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100dvh;
+  }
+
+  code, kbd, samp, pre, .font-mono {
+    font-family: 'Fira Code', monospace;
+  }
+}
+
+/* Fundo cósmico de alto desempenho (113KB WebP, zero lag) */
+.cosmic-bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-color: #040816;
+  background-image: url('/assets/aistudio/bg_optimized.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+/* Hexágonos e pontilhado químico sutil */
+.cosmic-pattern-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.08;
+  background-image: radial-gradient(rgba(56, 189, 248, 0.4) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* 18 colunas perfeitamente iguais */
+.grid-cols-18 {
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', var(--font-orbitron), sans-serif;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', var(--font-rajdhani), sans-serif;
+}
+
+/* Desempenho e proporção estrita dos blocos */
+.element-cell-block {
+  contain: layout paint style;
+  aspect-ratio: 1 / 1.15;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+/* Modo Leve (Eco Mode) */
+.eco-mode .element-cell-block {
+  box-shadow: 0 0 6px var(--cell-glow, #38bdf8) !important;
+}
+
+.eco-mode * {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Otimização de sombras no celular para 60fps */
+@media (hover: none) {
+  .element-cell-block {
+    box-shadow: 0 0 8px var(--cell-glow, #38bdf8) !important;
+  }
+}
+
+/* Celular na Horizontal (Paisagem, max-height 500px) */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root {
+    --gap-table: 3px;
+  }
+
+  .landscape-compact-nav {
+    height: 40px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .landscape-hide {
+    display: none !important;
+  }
+
+  .landscape-table-frame {
+    padding: 8px !important;
+    border-radius: 16px !important;
+  }
+
+  .landscape-grid-table {
+    gap: 3px !important;
+    min-width: unset !important;
+    width: 100% !important;
+  }
+
+  .landscape-cell {
+    padding: 1px !important;
+    border-width: 1px !important;
+    border-radius: 6px !important;
+  }
+
+  .landscape-cell .cell-symbol {
+    font-size: clamp(0.75rem, 2.4vh, 1.15rem) !important;
+  }
+
+  .landscape-cell .cell-num-mass {
+    font-size: 0.42rem !important;
+    padding: 0 !important;
+  }
+
+  .landscape-cell .cell-name {
+    font-size: 0.38rem !important;
+  }
+}
+
+/* Hover suave em dispositivos com mouse */
+@media (hover: hover) {
+  .element-cell-hoverable:hover {
+    transform: scale(1.14);
+    z-index: 20;
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(4, 8, 22, 0.9);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* Respeito a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Barras de rolagem escondidas (abas e menus roláveis) */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Modal do elemento: cabeçalho compacto em telas baixas (celular na horizontal) */
+@media (max-height: 500px) {
+  .modal-header {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  .modal-badge {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 12px !important;
+  }
+  .modal-subtitle {
+    display: none !important;
+  }
+  .modal-tabs {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+}
